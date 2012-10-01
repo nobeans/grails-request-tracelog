@@ -1,3 +1,5 @@
+package org.jggug.kobo.filter
+
 import grails.util.GrailsUtil
 
 class RequestTracelogFilters {
