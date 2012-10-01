@@ -35,6 +35,6 @@ grails.project.dependency.resolution = {
         ) {
             export = false
         }
-        runtime ":svn:1.0.2"
+        //runtime ":svn:1.0.2"
     }
 }
