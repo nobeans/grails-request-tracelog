@@ -28,7 +28,7 @@ class RequestTracelogGrailsPlugin {
         "web-app/**",
         "scripts/**",
     ]
-    def title = "Request Trace Log"
+    def title = "Request Tracelog"
     def author = "Yasuharu NAKANO"
     def authorEmail = "ynak@jggug.org"
     def license = "APACHE"
