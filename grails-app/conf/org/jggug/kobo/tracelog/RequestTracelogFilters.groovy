@@ -18,50 +18,51 @@ import grails.util.GrailsUtil
 
 class RequestTracelogFilters {
 
-    private static traceLog(log, request, params, session, needRequestAttr = true) {
-        log.debug "Request ID: " + request["org.codehaus.groovy.grails.WEB_REQUEST"]
-        if (needRequestAttr) {
-            log.debug "-"*20
-            log.debug "Request attributes:"
+    private static final String SEP = System.lineSeparator()
+
+    private static format(label, request, params, session) {
+        def buff = new StringBuilder()
+        buff << label << SEP // for the first line
+        buff << "[${label}]".padLeft(80, ">") << SEP
+        buff << "Request ID: " + request["org.codehaus.groovy.grails.WEB_REQUEST"] << SEP
+        if (!request.startedTime) {
+            buff << "-"*20 << SEP
+            buff << "Request attributes:" << SEP
             request.getAttributeNames().collect({it}).sort().each {
-                log.debug "  ${it} = ${request.getAttribute(it)}"
+                buff << "  ${it} = ${request.getAttribute(it)}" << SEP
             }
         }
-        log.debug "-"*20
-        log.debug "Request parameters:"
+        buff << "-"*20 << SEP
+        buff << "Request parameters:" << SEP
         params.keySet().sort().each {
-            log.debug "  ${it} = ${params[it]}"
+            buff << "  ${it} = ${params[it]}" << SEP
         }
-        log.debug "-"*20
-        log.debug "Session attributes:"
+        buff << "-"*20 << SEP
+        buff << "Session attributes:" << SEP
         session.getAttributeNames().collect({it}).sort().each {
-            log.debug "  ${it} = ${session.getAttribute(it)}"
+            buff << "  ${it} = ${session.getAttribute(it)}" << SEP
         }
+        buff << "-"*20 << SEP
+        def time = ""
+        if (request.startedTime) {
+            time = " (time: ${(System.currentTimeMillis() - request.startedTime) / 1000.0}[sec])"
+        }
+        buff << "[${label}]${time}".padLeft(80, "<") << SEP
+        return buff.toString().trim()
     }
 
     def filters = {
         if (GrailsUtil.isDevelopmentEnv()) { // only in development mode
             all(controller:'*', action:'*') {
                 before = {
+                    log.debug format("Before Action", request, params, session)
                     request.startedTime = System.currentTimeMillis()
-                    log.debug "[Before Action]".padRight(60, ">")
-                    traceLog(log, request, params, session, true)
-                    log.debug "-"*20
-                    log.debug "[Before Action]".padLeft(60, "<")
                 }
                 after = {
-                    log.debug "[After Action]".padRight(60, ">")
-                    traceLog(log, request, params, session, false)
-                    log.debug "-"*20
-                    def time = (System.currentTimeMillis() - request.startedTime) / 1000.0
-                    log.debug "[After Action] (time: ${time}[sec])".padLeft(60, "<")
+                    log.debug format("After Action", request, params, session)
                 }
                 afterView = {
-                    log.debug "[After View]".padRight(60, ">")
-                    traceLog(log, request, params, session, false)
-                    log.debug "-"*20
-                    def time = (System.currentTimeMillis() - request.startedTime) / 1000.0
-                    log.debug "[After View] (time: ${time}[sec])".padLeft(60, "<")
+                    log.debug format("After View", request, params, session)
                 }
             }
         }
