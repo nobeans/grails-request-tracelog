@@ -51,17 +51,32 @@ class RequestTracelogFilters {
         return buff.toString().trim()
     }
 
+    private static isTarget(params) {
+        if (params.controller != "assets") {
+            return true
+        }
+        // As default, a assets request is ignored without specifying a certain system property.
+        def assetsProp = System.getProperty("tracelog.assets")
+        if (assetsProp != null) {
+            return Boolean.valueOf(assetsProp)
+        }
+        return false
+    }
+
     def filters = {
         if (GrailsUtil.isDevelopmentEnv()) { // only in development mode
             all(controller:'*', action:'*') {
                 before = {
+                    if (!isTarget(params)) return
                     log.debug format("Before Action", request, params, session)
                     request.startedTime = System.currentTimeMillis()
                 }
                 after = {
+                    if (!isTarget(params)) return
                     log.debug format("After Action", request, params, session)
                 }
                 afterView = {
+                    if (!isTarget(params)) return
                     log.debug format("After View", request, params, session)
                 }
             }

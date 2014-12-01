@@ -89,9 +89,21 @@ Session attributes:
 Configuration
 -------------
 
+## Logging
+
 You can configure log settings (e.g. log level) by using the following FQCN of the filter.
 
 ```
 grails.app.filters.org.jggug.kobo.filter.RequestTracelogFilters
 ```
 
+
+## Assets request
+
+By default, a request for assets is ignored because it has little information for debug.
+If you want not to ignore it, you can use a system property:
+
+System property|value|description
+---------------|-----|-----------------
+tracelog.assets|true |emit assets log
+               |false|ignored (default)
