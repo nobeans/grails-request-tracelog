@@ -16,7 +16,7 @@ grails.project.dependency.resolution = {
     }
     plugins {
         // ...
-        compile "org.jggug.kobo:request-tracelog:0.2"
+        compile "org.jggug.kobo:request-tracelog:0.4"
     }
 }
 ```
