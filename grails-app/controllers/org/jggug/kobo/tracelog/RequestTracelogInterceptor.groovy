@@ -45,7 +45,7 @@ class RequestTracelogInterceptor {
         def buff = new StringBuilder()
         buff << label << SEP // for the first line
         buff << "[${label}]".padLeft(80, ">") << SEP
-        buff << "Request ID: " + request["org.codehaus.groovy.grails.WEB_REQUEST"] << SEP
+        buff << "Request ID: " + request["org.grails.WEB_REQUEST"] << SEP
         if (!request.startedTime) {
             buff << "-"*20 << SEP
             buff << "Request attributes:" << SEP
