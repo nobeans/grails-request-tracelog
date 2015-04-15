@@ -27,18 +27,18 @@ class RequestTracelogInterceptor {
     }
 
     boolean before() {
-        log.debug format("Before Action", request, params, session)
+        log.info format("Before Action", request, params, session)
         request.startedTime = System.currentTimeMillis()
         true
     }
 
     boolean after() {
-        log.debug format("After Action", request, params, session)
+        log.info format("After Action", request, params, session)
         true
     }
 
     void afterView() {
-        log.debug format("After View", request, params, session)
+        log.info format("After View", request, params, session)
     }
 
     private static format(label, request, params, session) {
