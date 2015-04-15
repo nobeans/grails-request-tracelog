@@ -79,5 +79,5 @@ Configuration
 
 You can configure log settings (e.g. log level) by using the following FQCN of the interceptor.
 
-    grails.app.controllers.org.jggug.kobo.tracelog.RequestTracelogInterceptor
+    grails.app.controllers.request.tracelog.RequestTracelogInterceptor
 

@@ -1,4 +1,4 @@
-package org.jggug.kobo.tracelog
+package request.tracelog
 
 import grails.test.mixin.TestFor
 import grails.test.runtime.DirtiesRuntime

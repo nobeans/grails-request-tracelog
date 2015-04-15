@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.jggug.kobo.tracelog
+package request.tracelog
 
 import grails.util.GrailsUtil
 
