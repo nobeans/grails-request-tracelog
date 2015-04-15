@@ -8,9 +8,7 @@ class RequestTracelogGrailsPlugin extends Plugin {
     def grailsVersion = "3.0.1 > *"
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
-        "grails-app/views/error.gsp",
-        "grails-app/domain/test/**",
-        "grails-app/i18n/**",
+        "grails-app/views/**",
     ]
     def title = "Request Tracelog"
     def author = "Yasuharu Nakano"
