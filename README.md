@@ -1,5 +1,5 @@
-Grails Request Tracelog Plugin
-==============================
+Request Tracelog Plugin for Grails 3
+====================================
 
 This is a grails plugin to get debug logs of request.
 
@@ -7,17 +7,11 @@ This is a grails plugin to get debug logs of request.
 Installation
 ------------
 
+In build.gradle:
+
 ```
-grails.project.dependency.resolution = {
-    // ...
-    repositories {
-        // ...
-        mavenRepo "http://dl.bintray.com/nobeans/maven"
-    }
-    plugins {
-        // ...
-        compile "org.jggug.kobo:request-tracelog:0.4"
-    }
+dependencies {
+    compile "org.jggug.kobo:request-tracelog:0.5"
 }
 ```
 
