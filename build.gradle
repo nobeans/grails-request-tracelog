@@ -17,7 +17,7 @@ plugins {
 }
 
 version project.appVersion
-group "org.jggug.kobo"
+group "org.grails.plugins"
 
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
