@@ -81,3 +81,14 @@ You can configure log settings (e.g. log level) by using the following FQCN of t
 
     grails.app.controllers.request.tracelog.RequestTracelogInterceptor
 
+
+Code Status
+-----------
+
+[![Build Status](https://travis-ci.org/nobeans/grails-request-tracelog.svg?branch=master)](https://travis-ci.org/nobeans/grails-request-tracelog)
+
+
+License
+-------
+
+This is released under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0)
