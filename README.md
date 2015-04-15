@@ -10,7 +10,7 @@ Installation
 In build.gradle:
 
     dependencies {
-        compile "org.jggug.kobo:request-tracelog:1.0"
+        compile "org.grails.plugins:request-tracelog:1.0.0"
     }
 
 
