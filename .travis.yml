@@ -1,8 +1,7 @@
 language: groovy
 
 jdk:
-  - oraclejdk7
   - openjdk7
 
 script:
-  - ./grailsw package-plugin
+  - ./gradlew clean check assemble
