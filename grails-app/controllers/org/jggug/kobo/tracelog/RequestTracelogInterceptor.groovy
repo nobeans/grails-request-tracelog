@@ -21,13 +21,8 @@ class RequestTracelogInterceptor {
     private static final String SEP = System.lineSeparator()
 
     RequestTracelogInterceptor() {
-        if (!GrailsUtil.isDevelopmentEnv()) return // only in development mode
-
-        // As default, a assets request is ignored without specifying a certain system property.
-        if (Boolean.getBoolean("tracelog.assets")) {
+        if (GrailsUtil.isDevelopmentEnv()) {
             matchAll()
-        } else {
-            matchAll().excludes(controller: 'assets')
         }
     }
 

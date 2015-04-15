@@ -12,34 +12,20 @@ import spock.lang.Unroll
 @TestFor(RequestTracelogInterceptor)
 class RequestTracelogInterceptorSpec extends Specification {
 
-    @Unroll
-    @DirtiesRuntime
-    void "controller '#controller' should be mached: #matched"() {
-        given:
-        GrailsUtil.metaClass.static.isDevelopmentEnv = { -> true }
-
-        when: "A request matches the interceptor"
-        withRequest(controller: controller)
-
-        then: "The interceptor does match"
-        interceptor.doesMatch() == matched
-
-        where:
-        matched | controller
-        true    | "foo"
-        true    | "bar"
-        false   | "assets"
-    }
-
     @DirtiesRuntime
     void "it should match only in develoment environment"() {
         given:
-        GrailsUtil.metaClass.static.isDevelopmentEnv = { -> false }
+        GrailsUtil.metaClass.static.isDevelopmentEnv = { -> dev }
 
         when: "A request matches the interceptor"
         withRequest(controller: "shouldMatchedController")
 
         then: "The interceptor does not match"
-        !interceptor.doesMatch()
+        interceptor.doesMatch() == matched
+
+        where:
+        dev   | matched
+        true  | true
+        false | false
     }
 }
