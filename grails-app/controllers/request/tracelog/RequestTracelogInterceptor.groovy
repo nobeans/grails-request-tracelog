@@ -18,8 +18,6 @@ import grails.util.GrailsUtil
 
 class RequestTracelogInterceptor {
 
-    private static final String SEP = System.lineSeparator()
-
     RequestTracelogInterceptor() {
         if (GrailsUtil.isDevelopmentEnv()) {
             matchAll()
@@ -42,34 +40,46 @@ class RequestTracelogInterceptor {
     }
 
     private static format(label, request, params, session) {
-        def buff = new StringBuilder()
-        buff << label << SEP // for the first line
-        buff << "[${label}]".padLeft(80, ">") << SEP
-        buff << "Request ID: " + request["org.grails.WEB_REQUEST"] << SEP
-        if (!request.startedTime) {
-            buff << "-"*20 << SEP
-            buff << "Request attributes:" << SEP
-            request.getAttributeNames().collect({it}).sort().each {
-                buff << "  ${it} = ${request.getAttribute(it)}" << SEP
-            }
+        def sw = new StringWriter()
+        def p = new IndentPrinter(sw, ' ' * 4)
+        def row = { message ->
+            p.printIndent()
+            p.println message
         }
-        buff << "-"*20 << SEP
-        buff << "Request parameters:" << SEP
-        params.keySet().sort().each {
-            buff << "  ${it} = ${params[it]}" << SEP
-        }
-        buff << "-"*20 << SEP
-        buff << "Session attributes:" << SEP
-        session.getAttributeNames().collect({it}).sort().each {
-            buff << "  ${it} = ${session.getAttribute(it)}" << SEP
-        }
-        buff << "-"*20 << SEP
-        def time = ""
+
         if (request.startedTime) {
-            time = " (time: ${(System.currentTimeMillis() - request.startedTime) / 1000.0}[sec])"
+            row "$label (time: ${(System.currentTimeMillis() - request.startedTime) / 1000.0}[sec])"
+        } else {
+            row label
         }
-        buff << "[${label}]${time}".padLeft(80, "<") << SEP
-        return buff.toString().trim()
+
+        p.incrementIndent()
+        row "Request ID: " + request["org.grails.WEB_REQUEST"]
+
+        if (!request.startedTime) {
+            row "Request attributes:"
+            p.incrementIndent()
+            request.getAttributeNames().collect({it}).sort().each {
+                row "${it}: ${request.getAttribute(it)}"
+            }
+            p.decrementIndent()
+        }
+
+        row "Request parameters:"
+        p.incrementIndent()
+        params.keySet().sort().each {
+            row "${it}: ${params[it]}"
+        }
+        p.decrementIndent()
+
+        row "Session attributes:"
+        p.incrementIndent()
+        session.getAttributeNames().collect({it}).sort().each {
+            row "${it}: ${session.getAttribute(it)}"
+        }
+        p.decrementIndent()
+
+        return sw.toString().trim()
     }
 }
 
