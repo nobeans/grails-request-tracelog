@@ -4,4 +4,9 @@ jdk:
   - openjdk7
 
 script:
-  - ./gradlew clean check assemble
+  - ./travis-build.sh
+
+env:
+  global:
+    - secure: SQbnCbE6YERBJ28R8ur+E12ZfdD5BUETrY10wcazZEQafI9CeQBiMNHtsvlIs00DPPXF2kTC5+WIoZyIBJq06cozsg/v/dEdh6H/vmIeXxD3omXrnlZSYNnTaMAHXiKiK2Uj2zNcVW0qDBb01KWv6jHLqkS140ChsUWNFij1ojc=
+    - secure: XrawF1rw4i/KXq9pqSOdSAP21N1fIOZde9zJxAwujcwu7iD6k/f/d5BjwnH7fPdpP6In3JmzxCEhIXmySktDIHFVrAXX1ezdZPR9f0fqBuVUZdwXjm3y2KWYUdEEB01lKTrfC9MZAcvAdtqYkBaTot+LsDwk244W0yzaBUmA0U0=

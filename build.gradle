@@ -69,3 +69,11 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
+
+bintray {
+    pkg {
+        userOrg = '' // If you want to publish to an organization
+        issueTrackerUrl = "https://github.com/nobeans/grails-$project.name/issues"
+        vcsUrl = "https://github.com/nobeans/grails-$project.name"
+    }
+}
