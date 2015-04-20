@@ -46,6 +46,8 @@ Only in the `development` environment, three request logs emit as follows:
             controller: sample
         Session attributes:
             org.grails.FLASH_SCOPE: [:]
+        Cookies:
+            JSESSIONID: FBDC27659D49A5EB8C257F25922DA45B (domain=null, path=null, maxAge=-1, secure=false, comment=null)
 
     After Action (time: 0.009[sec])
         Request ID: ServletWebRequest: uri=/myapp/sample/index;client=0:0:0:0:0:0:0:1;session=FBDC27659D49A5EB8C257F25922DA45B
@@ -54,6 +56,8 @@ Only in the `development` environment, three request logs emit as follows:
             controller: sample
         Session attributes:
             org.grails.FLASH_SCOPE: [:]
+        Cookies:
+            JSESSIONID: FBDC27659D49A5EB8C257F25922DA45B (domain=null, path=null, maxAge=-1, secure=false, comment=null)
 
     After View (time: 0.011[sec])
         Request ID: ServletWebRequest: uri=/myapp/sample/index;client=0:0:0:0:0:0:0:1;session=FBDC27659D49A5EB8C257F25922DA45B
@@ -62,6 +66,8 @@ Only in the `development` environment, three request logs emit as follows:
             controller: sample
         Session attributes:
             org.grails.FLASH_SCOPE: [:]
+        Cookies:
+            JSESSIONID: FBDC27659D49A5EB8C257F25922DA45B (domain=null, path=null, maxAge=-1, secure=false, comment=null)
 
 
 Configuration
