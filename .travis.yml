@@ -1,11 +1,12 @@
 language: groovy
-
+sudo: false
 jdk:
   - openjdk7
-
-script:
-  - ./travis-build.sh
-
+install: /bin/true
+script: ./travis-build.sh
+cache:
+  directories:
+    - $HOME/.gradle/
 env:
   global:
     - secure: SQbnCbE6YERBJ28R8ur+E12ZfdD5BUETrY10wcazZEQafI9CeQBiMNHtsvlIs00DPPXF2kTC5+WIoZyIBJq06cozsg/v/dEdh6H/vmIeXxD3omXrnlZSYNnTaMAHXiKiK2Uj2zNcVW0qDBb01KWv6jHLqkS140ChsUWNFij1ojc=

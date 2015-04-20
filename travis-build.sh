@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-rm -rf *.zip
-
 ./gradlew clean check assemble
 
 if [ -z $TRAVIS_BRANCH ]; then
