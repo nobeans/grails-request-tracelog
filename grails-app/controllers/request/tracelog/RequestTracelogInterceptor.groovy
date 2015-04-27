@@ -81,7 +81,7 @@ class RequestTracelogInterceptor {
 
         row "Cookies:"
         p.incrementIndent()
-        request.cookies.sort { it.name }.each {
+        request.cookies?.sort { it.name }?.each {
             row "${it.name}: ${it.value} (domain=${it.domain}, path=${it.path}, maxAge=${it.maxAge}, secure=${it.secure}, comment=${it.comment})"
         }
         p.decrementIndent()
