@@ -73,7 +73,7 @@ task wrapper(type: Wrapper) {
 
 bintray {
     pkg {
-        userOrg = '' // If you want to publish to an organization
+        userOrg = 'org.grails.plugins'
         issueTrackerUrl = "https://github.com/nobeans/grails-$project.name/issues"
         vcsUrl = "https://github.com/nobeans/grails-$project.name"
     }
