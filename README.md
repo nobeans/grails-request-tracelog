@@ -10,7 +10,7 @@ Installation
 In build.gradle:
 
     dependencies {
-        compile "org.grails.plugins:request-tracelog:1.1.2"
+        compile "org.grails.plugins:request-tracelog:1.2.0"
     }
 
 
