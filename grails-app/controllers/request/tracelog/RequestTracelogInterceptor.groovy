@@ -25,21 +25,21 @@ class RequestTracelogInterceptor {
     }
 
     boolean before() {
-        log.info format("Before Action", request, params, session)
+        log.info format("Before Action", request, params)
         request.startedTime = System.currentTimeMillis()
         true
     }
 
     boolean after() {
-        log.info format("After Action", request, params, session)
+        log.info format("After Action", request, params)
         true
     }
 
     void afterView() {
-        log.info format("After View", request, params, session)
+        log.info format("After View", request, params)
     }
 
-    private static format(label, request, params, session) {
+    private static format(label, request, params) {
         def sw = new StringWriter()
         def p = new IndentPrinter(sw, ' ' * 4)
         def row = { message ->
@@ -74,8 +74,13 @@ class RequestTracelogInterceptor {
 
         row "Session attributes:"
         p.incrementIndent()
-        session.getAttributeNames().collect({it}).sort().each {
-            row "${it}: ${session.getAttribute(it)}"
+        def session = request.getSession(false)
+        if (session) {
+            session.getAttributeNames().collect({it}).sort().each {
+                row "${it}: ${session.getAttribute(it)}"
+            }
+        } else {
+            row "(Session is not found)"
         }
         p.decrementIndent()
 
